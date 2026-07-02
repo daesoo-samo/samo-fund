@@ -98,29 +98,29 @@ def ensure_workbook():
 
 def update_excel(today_str, daily, monthly, total, principal, principal_raw):
     wb, ws = ensure_workbook()
-   prev_daily = 0
-prev_total = 0
-target_row = None
+    prev_daily = 0
+    prev_total = 0
+    target_row = None
 
-for row in range(2, ws.max_row + 1):
-    cell = ws.cell(row,1).value
+    for row in range(2, ws.max_row + 1):
+        cell = ws.cell(row, 1).value
 
-    if not cell:
-        continue
+        if not cell:
+            continue
 
-    if str(cell)[:10] == today_str:
-        target_row = row
-        continue
+        if str(cell)[:10] == today_str:
+            target_row = row
+            continue
 
-    try:
-        prev_daily = int(ws.cell(row,2).value)
-    except:
-        pass
+        try:
+            prev_daily = int(ws.cell(row, 2).value)
+        except:
+            pass
 
-    try:
-        prev_total = int(ws.cell(row,4).value)
-    except:
-        pass
+        try:
+            prev_total = int(ws.cell(row, 4).value)
+        except:
+            pass
 
     if target_row is None:
         target_row = ws.max_row + 1

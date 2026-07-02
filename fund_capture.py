@@ -113,8 +113,19 @@ def update_excel(today_str, daily, monthly, total, principal, principal_raw):
     daily_rate = daily / principal_raw if principal_raw else 0
     monthly_rate = monthly / principal_raw if principal_raw else 0
     total_rate = total / principal_raw if principal_raw else 0
-    daily_change = daily - int(prev_daily or 0) if prev_daily is not None else 0
-    total_change = total - int(prev_total or 0) if prev_total is not None else 0
+    try:
+    prev_daily = int(prev_daily)
+except:
+    prev_daily = 0
+
+daily_change = daily - prev_daily
+
+try:
+    prev_total = int(prev_total)
+except:
+    prev_total = 0
+
+total_change = total - prev_total
 
     values = [today_str, daily, monthly, total, principal, daily_rate, monthly_rate, total_rate, daily_change, total_change]
     for col, val in enumerate(values, start=1):

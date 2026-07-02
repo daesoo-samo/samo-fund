@@ -28,10 +28,19 @@ jobs:
         run: |
           playwright install chromium
 
+      - name: Install Korean fonts
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y fonts-noto-cjk
+          fc-cache -fv
+          TZ: Asia/Seoul
       - name: Run
         env:
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
           TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+          LANG: ko_KR.UTF-8
+          LC_ALL: ko_KR.UTF-8
+          
         run: |
           python fund_capture.py
 

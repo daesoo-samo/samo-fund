@@ -66,6 +66,11 @@ async def capture_page(crop_path: Path):
     async with async_playwright() as p:
         browser = await p.chromium.launch()
         page = await browser.new_page(viewport={"width": 1920, "height": 3000})
+        await page.add_style_tag(content="""
+        * {
+             font-family: "Noto Sans CJK KR", "Noto Sans KR", sans-serif !important;
+        }
+        """)
         await page.goto(URL, wait_until="networkidle", timeout=60000)
         await page.screenshot(path=str(full_path), full_page=True)
         await browser.close()

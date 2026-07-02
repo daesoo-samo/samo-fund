@@ -5,6 +5,9 @@ on:
     - cron: '10 8 * * *'
   workflow_dispatch:
 
+permissions:
+  contents: write
+
 jobs:
   capture:
     runs-on: ubuntu-latest
@@ -31,3 +34,11 @@ jobs:
           TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
         run: |
           python fund_capture.py
+
+      - name: Commit updated files
+        run: |
+          git config user.name "github-actions"
+          git config user.email "github-actions@github.com"
+          git add samo.xlsx *.png || true
+          git commit -m "Update fund data" || echo "No changes to commit"
+          git push

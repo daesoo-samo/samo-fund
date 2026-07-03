@@ -366,9 +366,8 @@ def pct(x):
 
 async def main():
     from datetime import datetime
-    import pytz
-
-    KST = pytz.timezone("Asia/Seoul")
+    from zoneinfo import ZoneInfo
+    KST = ZoneInfo("Asia/Seoul")
 
     print("UTC:", datetime.utcnow())
     print("KST:", datetime.now(KST))

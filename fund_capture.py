@@ -365,6 +365,18 @@ def pct(x):
 
 
 async def main():
+    from datetime import datetime
+    import pytz
+
+    KST = pytz.timezone("Asia/Seoul")
+
+    print("UTC:", datetime.utcnow())
+    print("KST:", datetime.now(KST))
+
+    telegram_send_message(
+        f"DEBUG\nUTC={datetime.utcnow()}\nKST={datetime.now(KST)}"
+    )
+    
     today = datetime.now(KST)
     today_str = today.strftime("%Y-%m-%d")
     text, daily, monthly, total, principal, principal_raw = get_text_and_values()

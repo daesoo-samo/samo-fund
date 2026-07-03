@@ -379,6 +379,13 @@ async def main():
     
     today = datetime.now(KST)
     today_str = today.strftime("%Y-%m-%d")
+
+    print("===== DEBUG =====")
+    print("UTC :", datetime.utcnow())
+    print("KST :", datetime.now(KST))
+    telegram_send_message(
+        f"DEBUG\nUTC={datetime.utcnow()}\nKST={datetime.now(KST)}"
+    )
     text, daily, monthly, total, principal, principal_raw = get_text_and_values()
 
     force = os.environ.get("FORCE_RUN", "false").lower() == "true"
